@@ -1,27 +1,34 @@
 import { v4 as uuid } from "uuid";
 
-/**
- * Category Database can be added here.
- * You can add category of your wish with different attributes
- * */
-
 export const categories = [
   {
     _id: uuid(),
-    categoryName: "Computer Programming",
-    description:
-      "Computer programming is the process of designing and building an executable computer program to accomplish a specific computing",
+    categoryName: "Intelligence",
+    description: `Three things:
+    - Strength/Aesthetics/Fitness- Knowledge/Wisdom/Intelligence- Social Skills/Machiavellianism/Game
+    You want to work on all three of them.
+    - You do not want to be 1/3.- You do not want to be 2/3.- You want to be 3/3.
+    Don't severely neglect one.
+    ~Harsh Strongman`,
   },
   {
     _id: uuid(),
-    categoryName: "Frontend Development",
-    description:
-      "Front-end web development, also known as client-side development is the practice of producing HTML, CSS and JavaScript for a website or Web Application",
+    categoryName: "Social Skills",
+    description: `Three things:
+    - Strength/Aesthetics/Fitness- Knowledge/Wisdom/Intelligence- Social Skills/Machiavellianism/Game
+    You want to work on all three of them.
+    - You do not want to be 1/3.- You do not want to be 2/3.- You want to be 3/3.
+    Don't severely neglect one.
+    ~Harsh Strongman`,
   },
   {
     _id: uuid(),
-    categoryName: "Backend Development",
-    description:
-      "Backend Development is also known as server-side development. It is everything that the users don't see and contains behind-the-scenes activities that occur when performing any action on a website.",
+    categoryName: "Strength",
+    description: `Three things:
+      - Strength/Aesthetics/Fitness- Knowledge/Wisdom/Intelligence- Social Skills/Machiavellianism/Game
+      You want to work on all three of them.
+      - You do not want to be 1/3.- You do not want to be 2/3.- You want to be 3/3.
+      Don't severely neglect one.
+      ~Harsh Strongman`,
   },
 ];
