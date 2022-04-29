@@ -1,0 +1,19 @@
+.categoryCard {
+  position: relative;
+  margin: calc(var(--size-9) * 2);
+}
+
+.categoryCardTextContainer {
+  backdrop-filter: blur(var(--size-6));
+  color: var(--white);
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.categoryCardImage {
+  width: 100%;
+  height: calc(var(--size-9) * 19);
+}

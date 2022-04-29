@@ -1,0 +1,22 @@
+.footerWrapper {
+  display: grid;
+  row-gap: var(--size-5);
+  grid-area: footer;
+  padding: var(--size-5) var(--size-9);
+  border-top: var(--size-2) solid var(--nice-gray);
+}
+
+.footerDesc,
+.footerAuthor {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 700px) {
+  .footerWrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footerAuthor {
+    justify-self: end;
+  }
+}

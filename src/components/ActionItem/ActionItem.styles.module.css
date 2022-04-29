@@ -1,0 +1,14 @@
+.actionItemWrapper{
+    padding: var(--size-5);
+    width: max-content;
+    cursor: pointer;
+}
+
+.actionItemWrapper:hover{
+    font-weight: 600;
+    color: var(--logo-color);
+}
+
+.actionItemLink{
+    color: var(--black);
+}

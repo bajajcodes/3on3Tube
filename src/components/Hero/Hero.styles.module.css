@@ -1,0 +1,8 @@
+.hero {
+    max-width: calc(var(--size-9) * 15);
+  }
+  
+  .heroImage {
+    vertical-align: text-top;
+    width: calc(var(--size-9) * 4.5);
+  }

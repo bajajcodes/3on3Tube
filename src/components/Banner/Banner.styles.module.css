@@ -1,0 +1,28 @@
+.banner {
+  background-color: var(--nice-gray);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  height: 60vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.bannerHeading {
+  color: var(--white);
+  margin: 0 0 var(--size-9);
+  font-size: var(--size-15);
+  text-align: center;
+}
+
+.bannerSection {
+  justify-content: center;
+  align-items: center;
+}
+
+.bannerLink {
+  background: var(--white);
+  text-transform: uppercase;
+  word-break: break-word;
+}

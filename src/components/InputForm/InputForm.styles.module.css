@@ -1,0 +1,24 @@
+.form {
+  row-gap: var(--size-5);
+}
+
+.formText .fontSizeInitial {
+  font-size: initial;
+}
+
+.secondaryOption:hover,
+.primaryOption {
+  border: var(--size-1) solid var(--nice-gray);
+  background: var(--logo-color);
+}
+
+.primaryOption:hover {
+  border: var(--size-1) solid var(--nice-gray);
+  background: var(--complementary);
+}
+
+@media (min-width: 500px) {
+  .formWrapper {
+    max-width: 40vw;
+  }
+}
