@@ -1,0 +1,37 @@
+.auth {
+  min-height: 80vh;
+  grid-area: content;
+  display: grid;
+  grid-template-areas:
+    "navigation"
+    "content"
+    "sidebar";
+}
+
+.authNav {
+  grid-area: navigation;
+}
+
+.authContent {
+  grid-area: content;
+}
+
+.authAside {
+  grid-area: sidebar;
+}
+
+.auth form {
+  border: var(--size-2) solid var(--nice-gray);
+  box-shadow: var(--size-0) var(--size-3) var(--size-4) var(--size-0)
+    var(--nice-gray);
+  margin: 2vh;
+}
+
+@media (min-width: 700px) {
+  .auth {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "navigation content sidebar"
+      "navigation content sidebar";
+  }
+}
