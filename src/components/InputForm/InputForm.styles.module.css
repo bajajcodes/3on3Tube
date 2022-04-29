@@ -7,7 +7,7 @@
 }
 
 .secondaryOption:hover,
-.primaryOption {
+.form .primaryOption {
   border: var(--size-1) solid var(--nice-gray);
   background: var(--logo-color);
 }
@@ -17,7 +17,7 @@
   background: var(--complementary);
 }
 
-@media (min-width: 500px) {
+@media (min-width: 700px) {
   .formWrapper {
     max-width: 40vw;
   }
