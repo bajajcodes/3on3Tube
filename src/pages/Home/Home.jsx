@@ -6,7 +6,7 @@ function Home() {
   return (
     <main className={styles.home}>
       <Banner />
-      <ul className="categoriesCardList">
+      <ul className="dgrid categoriesCardList">
         {categoriesCards.map((cardInfo, index) => (
           <CategoryCard cardInfo={cardInfo} key={index} />
         ))}
