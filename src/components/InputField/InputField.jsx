@@ -6,7 +6,7 @@ function InputField({ fieldMetaInfo }) {
 
   return (
     <label
-      className={styles.inputFieldWrapper}
+      className={`${styles.inputFieldWrapper}`}
       style={{ display: fieldMetaInfo?.wrapperDisplayType || "inline-block" }}
       name={fieldMetaInfo?.name ?? "No Name"}
     >
@@ -15,7 +15,7 @@ function InputField({ fieldMetaInfo }) {
       )}
       {fieldState.optionIcon && (
         <span
-          className={`${styles.inputFieldOption} material-icons`}
+          className={`${styles.inputFieldOption} material-icons-outlined`}
           onClick={(e) =>
             toggleIcon(
               e,
@@ -29,7 +29,7 @@ function InputField({ fieldMetaInfo }) {
         </span>
       )}
       <input
-        className={styles.inputField}
+        className={`p-sm ${styles.inputField}`}
         name={fieldMetaInfo?.name ?? "No Name"}
         type={fieldState.inputType}
         placeholder={fieldMetaInfo?.placeholderText || ""}

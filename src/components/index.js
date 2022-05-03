@@ -7,3 +7,8 @@ export { Header } from "./Header/Header";
 export { Footer } from "./Footer/Footer";
 export { Banner } from "./Banner/Banner";
 export { CategoryCard } from "./CategoryCard/CategoryCard";
+export { SupremeContainer } from "./SupremeContainer/SupremeContainer";
+export { Chips } from "./Chips/Chips";
+export { XRoof } from "./XRoof/XRoof";
+export { VideoCard } from "./VideoCard/VideoCard";
+export { VideoCardList } from "./VideoCardList/VideoCardList";

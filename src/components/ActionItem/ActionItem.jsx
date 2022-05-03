@@ -7,11 +7,11 @@ function ActionItem({ actionItemInfo }) {
   return (
     <Link
       to={linkTo}
-      className={`dflex align-items-center ${
+      className={`cursor-pointer font-wt-600 dflex align-items-center ${
         isFlexDirectionColumn ? "flex-col" : ""
       }   ${styles.actionItemWrapper} ${styles.actionItemLink}`}
     >
-      <span className={`material-icons`}>{itemIconType}</span>
+      <span className={`material-icons-outlined`}>{itemIconType}</span>
       <span className={`ml-auto`}>{itemText}</span>
     </Link>
   );

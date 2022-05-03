@@ -30,7 +30,7 @@ function InputForm({ formFields }) {
         <ul>
           {buttonLists.map((buttonItem) => (
             <button
-              className={`button ${
+              className={`button cursor-pointer font-wt-600 ${
                 buttonItem.isPrimary
                   ? styles.primaryOption
                   : styles.secondaryOption

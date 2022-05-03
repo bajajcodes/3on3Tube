@@ -1,18 +1,14 @@
-import { Header, Footer } from "components";
-import { Home, Auth } from "pages";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "styles/common.css";
+import { Header, Footer } from "components";
+import { BrowserRouter } from "react-router-dom";
+import { RouteSwitch } from "./RouteSwitch";
 
 function App() {
   return (
-    <div className="App">
+    <div className="dgrid App">
       <BrowserRouter>
         <Header />
-        <Routes>
-        <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Auth />} />
-          <Route path="/signup" element={<Auth />} />
-        </Routes>
+        <RouteSwitch />
         <Footer />
       </BrowserRouter>
     </div>

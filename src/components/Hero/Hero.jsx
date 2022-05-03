@@ -11,7 +11,7 @@ function Hero() {
           alt="logo for 3on3 Tube"
           src={logoPath}
         />
-        <span className="ml-6">{appName}</span>
+        <span className="ml-3">{appName}</span>
       </Link>
     </div>
   );
