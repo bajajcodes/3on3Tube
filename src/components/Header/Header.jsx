@@ -9,9 +9,6 @@ function Header() {
   return (
     <header className={styles.headerWrapper}>
       <div className="dflex">
-        <span className={`material-icons mr-5 ${styles.headerHamburger}`}>
-          menu
-        </span>
         <Hero />
       </div>
       <div style={{ display: "none" }}>

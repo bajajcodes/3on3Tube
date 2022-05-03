@@ -1,0 +1,13 @@
+.chip {
+  display: inline-block;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.activeChip {
+  background: var(--lynx-gray);
+}
+
+.chip input {
+  display: none;
+}

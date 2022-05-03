@@ -1,0 +1,97 @@
+.videoCardContainer {
+  overflow-wrap: anywhere;
+}
+
+.videoCard {
+  height: 100%;
+  padding: var(--size-5) var(--size-9);
+}
+
+.videoCardImage {
+  max-width: 100%;
+  height: calc(var(--size-9) * 11.5);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.videoCardPlayer {
+  max-width: 100%;
+  height: calc(var(--size-9) * 25);
+}
+
+.videoCardCreatorDetails {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas: "avatar name name" "avatar views duration";
+  width: max-content;
+  gap: var(--size-6);
+  align-items: center;
+}
+
+.videoCardCreatorAvatar {
+  grid-area: avatar;
+}
+
+.videoCardCreatorName {
+  grid-area: name;
+}
+
+.videoCardViewsWrapper {
+  grid-area: views;
+  display: flex;
+  align-items: center;
+  gap: var(--size-2);
+}
+
+.videoCardDurationWrapper {
+  grid-area: duration;
+  display: flex;
+  align-items: center;
+  gap: var(--size-2);
+}
+
+.videoCardOptions {
+  font-size: var(--size-9);
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+}
+
+.optionButton {
+  background: transparent;
+  border: 0;
+  gap: var(--size-4);
+  display: grid;
+}
+
+.videoCardDescription,
+.videoCardTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
+.videoCardTitle {
+  line-height: 1.1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.videoCardDescription {
+  line-height: 1.6;
+}
+
+@media (min-width: 700px) {
+  .optionButton,
+  .videoCardOptions {
+    display: flex;
+    align-items: center;
+  }
+}

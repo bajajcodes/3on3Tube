@@ -3,10 +3,10 @@ import { InputField } from "../InputField/InputField";
 
 function SearchBar() {
   return (
-    <div className={`dflex ${styles.searchWrapper}`}>
+    <div className={`dflex ${styles.searchWrapper} borderNormal`}>
       <InputField />
-      <button className={`button ${styles.searchButton}`}>
-        <span className={`material-icons`}>search</span>
+      <button className={`button cursor-pointer font-wt-600 ${styles.searchButton}`}>
+        <span className={`material-icons-outlined`}>search</span>
       </button>
     </div>
   );

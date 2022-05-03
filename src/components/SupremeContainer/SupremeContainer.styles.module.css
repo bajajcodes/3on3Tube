@@ -1,0 +1,9 @@
+@media (min-width: 500px) {
+  .supremeContainer {
+    display: grid;
+    grid-template-rows: auto 3fr;
+    gap: var(--size-10);
+    grid-area: content;
+    padding: var(--size-9);
+  }
+}

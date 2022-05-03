@@ -1,0 +1,3 @@
+.xroofContainer {
+  grid-template-columns: 1fr auto;
+}
