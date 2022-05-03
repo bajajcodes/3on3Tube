@@ -12,6 +12,8 @@ import {
 import {
   getAllVideosHandler,
   getVideoHandler,
+  addNewVideoHandler,
+  addNewBulkVideosHandler,
 } from "./backend/controllers/VideoController";
 import { videos } from "./backend/db/videos";
 import { categories } from "./backend/db/categories";
@@ -82,6 +84,8 @@ export function makeServer({ environment = "development" } = {}) {
       // video routes (public)
       this.get("/videos", getAllVideosHandler.bind(this));
       this.get("video/:videoId", getVideoHandler.bind(this));
+      this.post("/videos/", addNewVideoHandler.bind(this));
+      this.post("/videos/bulk", addNewBulkVideosHandler.bind(this));
 
       // TODO: POST VIDEO TO DB
 
@@ -131,6 +135,8 @@ export function makeServer({ environment = "development" } = {}) {
         removeVideoFromHistoryHandler.bind(this)
       );
       this.delete("/user/history/all", clearHistoryHandler.bind(this));
+
+      this.passthrough("https://youtube.googleapis.com/youtube/v3/**");
     },
   });
 }
