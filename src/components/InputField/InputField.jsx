@@ -6,7 +6,7 @@ function InputField({ fieldMetaInfo }) {
 
   return (
     <label
-      className={`borderNormal ${styles.inputFieldWrapper}`}
+      className={`${styles.inputFieldWrapper}`}
       style={{ display: fieldMetaInfo?.wrapperDisplayType || "inline-block" }}
       name={fieldMetaInfo?.name ?? "No Name"}
     >

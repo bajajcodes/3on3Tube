@@ -1,3 +1,4 @@
+import { videoCardFakeInfo } from "data";
 import { VideoCard } from "components";
 import {
   Home,
@@ -25,7 +26,7 @@ function RouteSwitch() {
         <Route path="playlists" element={<Playlists />} />
         <Route path="history" element={<History />} />
         <Route path="later" element={<WatchLater />} />
-        <Route path="watch" element={<VideoCard />} />
+        <Route path="watch" element={<VideoCard info={videoCardFakeInfo} />} />
       </Route>
       <Route path="/mockman" element={<Mockman />} />
     </Routes>
