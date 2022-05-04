@@ -11,14 +11,29 @@ import {
   Videos,
 } from "pages";
 import { Routes, Route } from "react-router-dom";
+import { CheckAuth } from "CheckAuth";
 import Mockman from "mockman-js";
 
 function RouteSwitch() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Auth />} />
-      <Route path="/signup" element={<Auth />} />
+      <Route
+        path="/login"
+        element={
+          <CheckAuth>
+            <Auth />
+          </CheckAuth>
+        }
+      />
+      <Route
+        path="/signup"
+        element={
+          <CheckAuth>
+            <Auth />
+          </CheckAuth>
+        }
+      />
       <Route path="/videos" element={<Videos />}>
         <Route index element={<Explore />} />
         <Route path="explore" element={<Explore />} />
