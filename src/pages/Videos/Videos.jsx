@@ -1,6 +1,5 @@
 import styles from "./Videos.styles.module.css";
 import { navActionItems } from "data";
-import { v4 as uuid } from "uuid";
 import { ActionItem } from "components";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
@@ -34,8 +33,8 @@ function Videos() {
           close
         </span>
         <ul onClick={() => makeNavToggle()}>
-          {navActionItems.map((actionItemInfo) => (
-            <ActionItem actionItemInfo={actionItemInfo} key={uuid()} />
+          {navActionItems.map((actionItemInfo, index) => (
+            <ActionItem actionItemInfo={actionItemInfo} key={index} />
           ))}
         </ul>
       </nav>
