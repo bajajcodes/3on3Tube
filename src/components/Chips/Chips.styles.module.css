@@ -2,6 +2,7 @@
   display: inline-block;
   font-weight: 500;
   cursor: pointer;
+  height: max-content;
 }
 
 .activeChip {

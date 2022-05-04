@@ -13,6 +13,15 @@
   margin: 0;
 }
 
+.logoutWrapper {
+  padding: var(--size-5);
+  width: max-content;
+}
+
+.logoutWrapper:hover {
+  color: var(--logo-color);
+}
+
 @media (min-width: 500px) {
   .headerWrapper {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));

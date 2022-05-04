@@ -1,8 +1,10 @@
 import styles from "./InputForm.styles.module.css";
-import { v4 as uuid } from "uuid";
 import { InputField } from "components";
 import { Link } from "react-router-dom";
 import { useForm } from "./useForm.hook";
+import { useEffect } from "react";
+import { useAxios } from "hooks";
+import { useAuth } from "context";
 
 function InputForm({ formFields }) {
   const {
@@ -13,7 +15,33 @@ function InputForm({ formFields }) {
     linkText,
     linkTo,
   } = formFields;
-  const { handleFormSubmit } = useForm();
+  const url = `/api/auth/${linkTo === "/login" ? "signup" : "login"}`;
+
+  const { formState, handleFormSubmit } = useForm();
+  const { response, error, loading, requestData } = useAxios();
+  const { authDispatch } = useAuth();
+
+  useEffect(async () => {
+    if (formState.isValidated && formState.error !== true) {
+      await requestData({
+        method: "post",
+        url,
+        body: formState.response,
+      });
+    } else if (formState.isValidated && formState.error === true) {
+      console.error(formState.response?.error);
+    }
+  }, [formState]);
+
+  useEffect(() => {
+    if (!loading) {
+      if (error !== "") {
+        console.error({ response, error});
+      } else {
+        authDispatch({ type: "LOG_IN", payload: response.encodedToken });
+      }
+    }
+  }, [loading]);
 
   return (
     <div className={styles.formWrapper}>
@@ -23,19 +51,19 @@ function InputForm({ formFields }) {
       >
         <h2 className="text-center">{headerText}</h2>
         <ul>
-          {fieldMetaInfoLists.map((fieldMetaInfo) => (
-            <InputField fieldMetaInfo={fieldMetaInfo} key={uuid()} />
+          {fieldMetaInfoLists.map((fieldMetaInfo, index) => (
+            <InputField fieldMetaInfo={fieldMetaInfo} key={index} />
           ))}
         </ul>
         <ul>
-          {buttonLists.map((buttonItem) => (
+          {buttonLists.map((buttonItem, index) => (
             <button
               className={`button cursor-pointer font-wt-600 ${
                 buttonItem.isPrimary
                   ? styles.primaryOption
                   : styles.secondaryOption
               }`}
-              key={uuid()}
+              key={index}
               style={{ display: "block" }}
             >
               {buttonItem.text}

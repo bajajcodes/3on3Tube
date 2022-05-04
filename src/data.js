@@ -24,6 +24,13 @@ const headerActionItems = [
   },
 ];
 
+const headerLogoutActionItem = {
+  itemText: "Logout",
+  itemIconType: "logout",
+  isFlexDirectionColumn: true,
+  linkTo: "/login",
+};
+
 const categoriesCards = [
   {
     cardImagePath: `${publicURL}/assets/images/3on3Intelligence.jpg`,
@@ -50,7 +57,7 @@ const loginFormFields = {
       toggleIcon: "",
       inputType: "text",
       placeholderText: "Enter Email",
-      name: "Email",
+      name: "email",
     },
     {
       wrapperDisplayType: "grid",
@@ -60,7 +67,7 @@ const loginFormFields = {
       toggleIcon: "visibility",
       inputType: "password",
       placeholderText: "Enter Password",
-      name: "Password",
+      name: "password",
     },
   ],
   buttonLists: [
@@ -89,7 +96,7 @@ const signupFormFields = {
       toggleIcon: "",
       inputType: "text",
       placeholderText: "Enter First Name",
-      name: "First Name",
+      name: "first name",
     },
     {
       wrapperDisplayType: "grid",
@@ -99,7 +106,7 @@ const signupFormFields = {
       toggleIcon: "",
       inputType: "text",
       placeholderText: "Enter Last Name",
-      name: "Last Name",
+      name: "last name",
     },
     {
       wrapperDisplayType: "grid",
@@ -109,7 +116,7 @@ const signupFormFields = {
       toggleIcon: "",
       inputType: "text",
       placeholderText: "Enter Email",
-      name: "Email",
+      name: "email",
     },
     {
       wrapperDisplayType: "grid",
@@ -119,7 +126,7 @@ const signupFormFields = {
       toggleIcon: "visibility",
       inputType: "password",
       placeholderText: "Enter Password",
-      name: "Password",
+      name: "password",
     },
     {
       wrapperDisplayType: "grid",
@@ -129,7 +136,7 @@ const signupFormFields = {
       toggleIcon: "visibility",
       inputType: "password",
       placeholderText: "Enter Confirm Password",
-      name: "Confirm Password",
+      name: "confirm password",
     },
   ],
   buttonLists: [
@@ -257,6 +264,11 @@ const videoCardFakeInfo = {
   Instagram: https://www.instagram.com/thevarunmayya/`,
 };
 
+const guestLoginCredentials = {
+  email: "anonxSatya@tube.com",
+  password: "anonx",
+};
+
 export {
   logoPath,
   appName,
@@ -275,4 +287,6 @@ export {
   playlistsInfo,
   historyInfo,
   videoCardFakeInfo,
+  guestLoginCredentials,
+  headerLogoutActionItem,
 };

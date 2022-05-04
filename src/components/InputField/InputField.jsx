@@ -33,6 +33,7 @@ function InputField({ fieldMetaInfo }) {
         name={fieldMetaInfo?.name ?? "No Name"}
         type={fieldState.inputType}
         placeholder={fieldMetaInfo?.placeholderText || ""}
+        autoComplete="on"
       />
     </label>
   );
