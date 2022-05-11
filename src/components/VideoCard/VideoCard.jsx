@@ -1,9 +1,8 @@
 import styles from "./VideoCard.styles.module.css";
-import { useLocation } from "react-router-dom";
-import { ImageVideoCard, IframeVideoCard, optionsInfo, VideoCardDescription } from "./VideoCard.helpers";
+import { useNavigate } from "react-router-dom";
+import { optionsInfo,makeDurationReadable } from "./VideoCard.helpers";
 
 function VideoCard({ info }) {
-  const location = useLocation();
   const {
     thumbnailPath,
     videoId,
@@ -12,17 +11,21 @@ function VideoCard({ info }) {
     creatorName,
     views,
     duration,
-    description,
   } = info;
+  const navigate = useNavigate();
 
   return (
-    <div className={`${styles.videoCardContainer}`}>
+    <div
+      className={`${styles.videoCardContainer} ${styles.videoCardContainerMW}`}
+    >
       <div className={`${styles.videoCard} gap-10 dflex flex-col borderNormal`}>
-        {!location.pathname.includes("/videos/watch") &&
-          ImageVideoCard(thumbnailPath)}
-
-        {location.pathname.includes("/videos/watch") &&
-          IframeVideoCard(videoId)}
+        <div
+          className={`${styles.videoCardImage}`}
+          style={{ backgroundImage: `url(${thumbnailPath})` }}
+          onClick={() => {
+            navigate(`/videos/watch/${videoId}`);
+          }}
+        ></div>
 
         <div className={`${styles.videoCardContent} dflex flex-col gap-10`}>
           <h2 className={`${styles.videoCardTitle}`}>{title}</h2>
@@ -49,7 +52,7 @@ function VideoCard({ info }) {
               >
                 timer
               </span>
-              <span className={`${styles.videoCardDuration}`}>{duration}</span>
+              <span className={`${styles.videoCardDuration}`}>{makeDurationReadable(duration)}</span>
             </div>
           </div>
 
@@ -64,9 +67,6 @@ function VideoCard({ info }) {
               </button>
             ))}
           </div>
-
-          {location.pathname.includes("/videos/watch") &&
-            VideoCardDescription(description)}
         </div>
       </div>
     </div>

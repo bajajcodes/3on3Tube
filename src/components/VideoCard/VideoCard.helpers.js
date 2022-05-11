@@ -1,38 +1,40 @@
-import styles from "./VideoCard.styles.module.css";
-
 export const optionsInfo = [
   {
     iconText: "Like",
-    iconType: "thumb_up"
+    iconType: "thumb_up",
   },
   {
     iconText: "Save To Playlist",
-    iconType: "playlist_add"
+    iconType: "playlist_add",
   },
   {
     iconText: "Watch Later",
-    iconType: "watch_later"
+    iconType: "watch_later",
   },
 ];
-export function VideoCardDescription(description) {
-  return (
-    <span className={`${styles.videoCardDescription}`}>{description}</span>
+
+export function makeDurationReadable(duration) {
+  const readable = [];
+  const hours = duration.substring(2, duration.indexOf("H"));
+  if (hours !== "PT") {
+    readable.push(hours);
+  }
+  let minutes = duration.substring(
+    duration.indexOf("M") - 2,
+    duration.indexOf("M")
   );
-}
-export function ImageVideoCard(thumbnailPath) {
-  return (
-    <div
-      className={`${styles.videoCardImage}`}
-      style={{ backgroundImage: `url(${thumbnailPath})` }}
-    ></div>
+  if (minutes) {
+    minutes = minutes.replace(/[A-Za-z]/, "");
+    readable.push(minutes);
+  }
+  let seconds = duration.substring(
+    duration.indexOf("S") - 2,
+    duration.indexOf("S")
   );
-}
-export function IframeVideoCard(videoId) {
-  return (
-    <iframe
-      type="text/html"
-      src={`https://www.youtube.com/embed/${videoId}`}
-      className={`${styles.videoCardPlayer}`}
-    ></iframe>
-  );
+  if (seconds) {
+    seconds = seconds.replace(/[A-Za-z]/, "");
+    readable.push(seconds);
+  }
+
+  return readable.join(":");
 }

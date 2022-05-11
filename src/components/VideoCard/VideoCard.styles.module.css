@@ -2,6 +2,10 @@
   overflow-wrap: anywhere;
 }
 
+.videoCardContainerMW {
+  max-width: calc(var(--size-16) * 10.5);
+}
+
 .videoCard {
   height: 100%;
   padding: var(--size-5) var(--size-9);
@@ -16,9 +20,8 @@
   cursor: pointer;
 }
 
-.videoCardPlayer {
-  max-width: 100%;
-  height: calc(var(--size-9) * 25);
+.videoCardPlayerContainer {
+  aspect-ratio: 16/9;
 }
 
 .videoCardCreatorDetails {
@@ -57,7 +60,10 @@
   font-size: var(--size-9);
   cursor: pointer;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(calc(var(--size-15) * 1.25), 1fr)
+  );
 }
 
 .optionButton {
@@ -86,6 +92,7 @@
 
 .videoCardDescription {
   line-height: 1.6;
+  white-space: break-spaces;
 }
 
 @media (min-width: 700px) {
