@@ -4,9 +4,11 @@ import { Hero } from "../Hero/Hero";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { ActionItem } from "../ActionItem/ActionItem";
 import { useAuth } from "context";
+import { useLocation } from "react-router-dom";
 
 function Header() {
   const { authState, authDispatch } = useAuth();
+  const location = useLocation();
 
   function makeUserLogOut() {
     authDispatch({ type: "LOG_OUT" });
@@ -17,10 +19,12 @@ function Header() {
       <div className="dflex">
         <Hero />
       </div>
-      <div style={{ display: "none" }}>
-        <SearchBar />
-      </div>
-      <div className={` ${styles.headerEnd}`}>
+      {location.pathname === "/videos/explore" && (
+        <div>
+          <SearchBar />
+        </div>
+      )}
+      <div className={`${styles.headerEnd}`}>
         {headerActionItems.map((actionItemInfo, index) => {
           if (actionItemInfo.itemText !== "Login") {
             return <ActionItem actionItemInfo={actionItemInfo} key={index} />;
@@ -30,7 +34,8 @@ function Header() {
         })}
         {authState.isLoggedIn && (
           <div
-            className={`cursor-pointer font-wt-600 dflex align-items-center flex-col   ${styles.logoutWrapper} `}
+            className={`cursor-pointer font-wt-600 dflex align-items-center flex-col ${styles.logoutWrapper}`}
+            style={{}}
             onClick={makeUserLogOut}
           >
             <span className={`material-icons-outlined`}>

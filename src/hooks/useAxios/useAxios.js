@@ -7,12 +7,15 @@ function useAxios() {
   const [loading, setLoading] = useState(true);
 
   async function requestData(axiosParams) {
-    const { method, url, body } = axiosParams;
     try {
-      const response = await axios[method](url, body);
+      // const { url, method, body = null, headers = null } = axiosParams;
+      // const response = await axios[method](url, headers, body);
+      const response = await axios.request(axiosParams);
       setResponse(response.data);
     } catch (error) {
       console.error({ error });
+      console.error(error.toJSON());
+      console.error(error.response.data);
       setError(error);
     } finally {
       setLoading(false);

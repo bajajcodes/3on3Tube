@@ -52,15 +52,22 @@
     grid-template-columns: auto 3fr;
   }
 
+  .videosNav:nth-child(3){
+    grid-area: content;
+  }
+
   .videosNav {
-    position: initial;
+    position: sticky;
+    top: calc(var(--size-15) * 2.3);
+    left: var(--size-4);
     transform: translateX(0);
     grid-area: navigation;
+    height: max-content;
+    border: var(--size-2) solid var(--nice-gray);
   }
 
   .navCloseOption,
   .headerHamburger {
     display: none;
   }
-
 }

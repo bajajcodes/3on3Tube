@@ -12,3 +12,4 @@ export { Chips } from "./Chips/Chips";
 export { XRoof } from "./XRoof/XRoof";
 export { VideoCard } from "./VideoCard/VideoCard";
 export { VideoCardList } from "./VideoCardList/VideoCardList";
+export {VideoCardIframe} from "./VideoCard/VideoCardIframe";

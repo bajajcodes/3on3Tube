@@ -26,7 +26,7 @@ function InputForm({ formFields }) {
       await requestData({
         method: "post",
         url,
-        body: formState.response,
+        data:{...formState.response},
       });
     } else if (formState.isValidated && formState.error === true) {
       console.error(formState.response?.error);
@@ -36,7 +36,7 @@ function InputForm({ formFields }) {
   useEffect(() => {
     if (!loading) {
       if (error !== "") {
-        console.error({ response, error});
+        console.error({ response, error });
       } else {
         authDispatch({ type: "LOG_IN", payload: response.encodedToken });
       }
