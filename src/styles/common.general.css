@@ -1,0 +1,83 @@
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.active-link {
+  color: var(--logo-color) !important;
+}
+
+.App {
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
+}
+
+.Link {
+  color: var(--black);
+  font-size: var(--size-12);
+  font-weight: var(--weight-black);
+}
+
+.Link:hover {
+  text-decoration: underline;
+}
+
+.font-wt-600 {
+  font-weight: 600;
+}
+
+.font-wt-500 {
+  font-weight: 500;
+}
+
+.borderNone {
+  border: 0;
+}
+
+.borderNormal {
+  border: var(--size-1) solid var(--nice-gray);
+}
+
+.gap-10 {
+  gap: var(--size-10);
+}
+
+.button {
+  display: block;
+  border: var(--size-1) solid var(--nice-gray);
+  padding: var(--size-9);
+  margin: 0 0 var(--size-5);
+  font-size: var(--size-9);
+  width: 100%;
+  height: max-content;
+  letter-spacing: var(--size-2);
+  word-spacing: var(--size-2);
+  background: transparent;
+}
+
+.button:hover,
+.button:focus {
+  border: var(--size-1) solid var(--nice-gray);
+}
+
+.categoriesCardList {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(calc(var(--size-9) * 19), 1fr)
+  );
+}
+
+.flexCenter {
+  justify-content: center;
+  align-items: center;
+  gap: var(--size-10);
+}
+
+.mockman {
+  grid-area: content;
+}
+
+.w50break {
+  width: 100%;
+}
