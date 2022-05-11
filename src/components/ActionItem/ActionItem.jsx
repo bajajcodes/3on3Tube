@@ -10,7 +10,9 @@ function ActionItem({ actionItemInfo }) {
       className={({ isActive }) =>
         `cursor-pointer font-wt-600 dflex align-items-center ${
           isFlexDirectionColumn ? "flex-col" : ""
-        }   ${styles.actionItemWrapper} ${styles.actionItemLink} ${isActive ? "active-link" : ""}`
+        }   ${styles.actionItemWrapper} ${styles.actionItemLink} ${
+          isActive ? "active-link" : ""
+        }`
       }
     >
       <span className={`material-icons-outlined`}>{itemIconType}</span>

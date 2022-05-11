@@ -7,7 +7,7 @@ import { useState } from "react";
 function Videos() {
   const [toggleNav, setToggleNav] = useState(false);
 
-  function makeNavToggle() {
+  function makeNavToggle(e) {
     setToggleNav((p) => !p);
   }
 
@@ -15,7 +15,7 @@ function Videos() {
     <main className={`${styles.videosMain}`}>
       <span
         className={`material-icons-outlined mr-5 ${styles.headerHamburger}`}
-        onClick={() => makeNavToggle()}
+        onClick={(e) => makeNavToggle(e)}
       >
         menu
       </span>
@@ -28,11 +28,11 @@ function Videos() {
       >
         <span
           className={`material-icons-outlined ${styles.navCloseOption}`}
-          onClick={() => makeNavToggle()}
+          onClick={(e) => makeNavToggle(e)}
         >
           close
         </span>
-        <ul onClick={() => makeNavToggle()}>
+        <ul onClick={(e) => makeNavToggle(e)}>
           {navActionItems.map((actionItemInfo, index) => (
             <ActionItem actionItemInfo={actionItemInfo} key={index} />
           ))}
