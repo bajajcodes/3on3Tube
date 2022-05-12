@@ -45,7 +45,7 @@ export const addItemToLikedVideos = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const { video } = JSON.parse(request.requestBody);
-    if (user.likes.some((item) => item._id === video._id)) {
+    if (user.likes.some((item) => item.videoId === video.videoId)) {
       return new Response(
         409,
         {},
@@ -66,6 +66,30 @@ export const addItemToLikedVideos = function (schema, request) {
   );
 };
 
+export const getItemFromLikedVideos = function (schema, request) {
+  const user = requiresAuth.call(this, request);
+  if (user) {
+    const videoId = request.params.videoId;
+    if (user.likes.some((item) => item.videoId === videoId)) {
+      return new Response(
+        201,
+        {},
+        {
+          likes: true,
+        }
+      );
+    }
+    return new Response(201, {}, { likes: false });
+  }
+  return new Response(
+    404,
+    {},
+    {
+      errors: ["The email you entered is not Registered. Not Found error"],
+    }
+  );
+};
+
 /**
  * This handler handles removing videos from user's likes.
  * send DELETE Request at /api/user/likes/:videoId
@@ -75,7 +99,7 @@ export const removeItemFromLikedVideos = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const videoId = request.params.videoId;
-    const filteredLikes = user.likes.filter((item) => item._id !== videoId);
+    const filteredLikes = user.likes.filter((item) => item.videoId !== videoId);
     this.db.users.update({ likes: filteredLikes });
     return new Response(200, {}, { likes: filteredLikes });
   }

@@ -11,6 +11,7 @@ import {
 } from "pages";
 import { Routes, Route } from "react-router-dom";
 import { CheckAuth } from "CheckAuth";
+import { RequiresAuth } from "RequiresAuth";
 import Mockman from "mockman-js";
 
 function RouteSwitch() {
@@ -36,7 +37,14 @@ function RouteSwitch() {
       <Route path="/videos" element={<Videos />}>
         <Route index element={<Explore />} />
         <Route path="explore" element={<Explore />} />
-        <Route path="liked" element={<LikedVideos />} />
+        <Route
+          path="liked"
+          element={
+            <RequiresAuth>
+              <LikedVideos />
+            </RequiresAuth>
+          }
+        />
         <Route path="playlists" element={<Playlists />} />
         <Route path="history" element={<History />} />
         <Route path="later" element={<WatchLater />} />

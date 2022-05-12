@@ -9,6 +9,7 @@ const watchLaterInfo = { ...info, headingText: "Watch later" };
 
 const likedVideosInfo = {
   ...info,
+  iconText: "",
   headingText: "Liked Videos",
 };
 
