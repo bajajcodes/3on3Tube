@@ -1,15 +1,11 @@
-export const optionsInfo = [
+const optionsInfo = [
   {
     iconText: "Save To Playlist",
     iconType: "playlist_add",
   },
-  {
-    iconText: "Watch Later",
-    iconType: "watch_later",
-  },
 ];
 
-export function makeDurationReadable(duration) {
+function makeDurationReadable(duration) {
   const readable = [];
   const hours = duration.substring(2, duration.indexOf("H"));
   if (hours !== "PT") {
@@ -35,7 +31,7 @@ export function makeDurationReadable(duration) {
   return readable.join(":");
 }
 
-export function likedDislikedVideoOption(liked) {
+function likedDislikedVideoOption(liked) {
   if (liked) {
     return { likesIconText: "Dislike", likesIconType: "thumb_down" };
   }
@@ -44,3 +40,21 @@ export function likedDislikedVideoOption(liked) {
     likesIconType: "thumb_up",
   };
 }
+
+function watchlaterVideoOption(watchlater) {
+  if (watchlater) {
+    return {
+      watchlaterIconType: "task_alt",
+    };
+  }
+  return {
+    watchlaterIconType: "watch_later",
+  };
+}
+
+export {
+  watchlaterVideoOption,
+  likedDislikedVideoOption,
+  makeDurationReadable,
+  optionsInfo,
+};

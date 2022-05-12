@@ -20,7 +20,7 @@ function useVideoData() {
     });
   }
 
-  function postData(endpoint, data) {
+  function postData(endpoint, video) {
     const token = getValue("token") ?? false;
     if (!token) {
       throw new Error("Token does not exist, login first.");
@@ -28,14 +28,14 @@ function useVideoData() {
     requestData({
       url: `/api/user/${endpoint}`,
       method: "post",
-      data: { ...data },
+      data: { video },
       headers: {
         authorization: token,
       },
     });
   }
 
-  function deleteData(endpoint, data) {
+  function deleteData(endpoint) {
     const token = getValue("token") ?? false;
     if (!token) {
       throw new Error("Token does not exist, login first.");
@@ -43,7 +43,6 @@ function useVideoData() {
     requestData({
       url: `/api/user/${endpoint}`,
       method: "delete",
-      data: { data },
       headers: {
         authorization: token,
       },

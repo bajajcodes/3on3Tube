@@ -1,19 +1,15 @@
-import { videoCardFakeInfo, watchLaterInfo } from "data";
+import { watchLaterInfo } from "data";
 import { SupremeContainer, XRoof, VideoCardList } from "components";
-
-function getFakeVideos() {
-  return Array.from({ length: 30 }, (_, i) => ({
-    ...videoCardFakeInfo,
-    videoId: i,
-  }));
-}
+import { useWatchLater } from "context";
 
 function WatchLater() {
-  const videos = getFakeVideos();
+  const { videos } = useWatchLater();
 
   return (
     <SupremeContainer
-      headerComponent={<XRoof info={watchLaterInfo} />}
+      headerComponent={
+        <XRoof info={{ ...watchLaterInfo, videosCount: videos.length }} />
+      }
       bodyComponent={<VideoCardList videos={videos} />}
     />
   );

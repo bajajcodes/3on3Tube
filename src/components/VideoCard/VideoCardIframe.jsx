@@ -3,10 +3,11 @@ import {
   optionsInfo,
   makeDurationReadable,
   likedDislikedVideoOption,
+  watchlaterVideoOption,
 } from "./VideoCard.helpers";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useAxios, useLikedVideosData } from "hooks";
+import { useAxios, useLikedVideosData, useWatchLaterData } from "hooks";
 import { useAuth } from "context";
 
 function VideoCardIframe() {
@@ -15,6 +16,8 @@ function VideoCardIframe() {
   const [options, setOptions] = useState({
     likesIconText: "Like",
     likesIconType: "thumb_up",
+    watchlaterIconText: "Watch Later",
+    watchlaterIconType: "watch_later",
   });
   const {
     response: videoResponse,
@@ -23,6 +26,7 @@ function VideoCardIframe() {
     requestData,
   } = useAxios();
   const { isLikedVideo, toggleLikesVideo } = useLikedVideosData();
+  const { isInWatchLaterVideos, toggleWatchLaterVideos } = useWatchLaterData();
   const { authState } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,6 +46,10 @@ function VideoCardIframe() {
           const object = likedDislikedVideoOption(true);
           setOptions((p) => ({ ...p, ...object }));
         }
+        if (isInWatchLaterVideos(videoResponse.video.videoId)) {
+          const object = watchlaterVideoOption(true);
+          setOptions((p) => ({ ...p, ...object }));
+        }
       } else {
         console.error({ videoError });
       }
@@ -58,6 +66,21 @@ function VideoCardIframe() {
       }
       setOptions((p) => ({ ...p, ...object }));
       toggleLikesVideo(info);
+    } else {
+      navigate("/login", { replace: true, state: { from: location.pathname } });
+    }
+  }
+
+  function toggleWatchLaterOption() {
+    if (authState.isLoggedIn) {
+      let object = null;
+      if (options.watchlaterIconType === "watch_later") {
+        object = watchlaterVideoOption(true);
+      } else {
+        object = watchlaterVideoOption(false);
+      }
+      setOptions((p) => ({ ...p, ...object }));
+      toggleWatchLaterVideos(info);
     } else {
       navigate("/login", { replace: true, state: { from: location.pathname } });
     }
@@ -124,6 +147,15 @@ function VideoCardIframe() {
                     {options.likesIconType}
                   </span>
                   {options.likesIconText}
+                </button>
+                <button
+                  className={`cursor-pointer  font-wt-600 ${styles.optionButton}`}
+                  onClick={() => toggleWatchLaterOption()}
+                >
+                  <span className={`material-icons-outlined`}>
+                    {options.watchlaterIconType}
+                  </span>
+                  {options.watchlaterIconText}
                 </button>
                 {optionsInfo.map(({ iconText, iconType }, index) => (
                   <button

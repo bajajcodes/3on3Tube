@@ -1,9 +1,13 @@
 import styles from "./VideoCard.styles.module.css";
-import { useNavigate } from "react-router-dom";
 import {
   optionsInfo,
   makeDurationReadable,
+  watchlaterVideoOption,
 } from "./VideoCard.helpers";
+import { useAuth } from "context";
+import { useWatchLaterData } from "hooks";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function VideoCard({ info }) {
   const {
@@ -15,7 +19,35 @@ function VideoCard({ info }) {
     views,
     duration,
   } = info;
+  const [options, setOptions] = useState({
+    watchlaterIconText: "Watch Later",
+    watchlaterIconType: "watch_later",
+  });
+  const { authState } = useAuth();
+  const { isInWatchLaterVideos, toggleWatchLaterVideos } = useWatchLaterData();
   const navigate = useNavigate();
+
+  function toggleWatchLaterOption() {
+    if (authState.isLoggedIn) {
+      let object = null;
+      if (options.watchlaterIconType === "watch_later") {
+        object = watchlaterVideoOption(true);
+      } else {
+        object = watchlaterVideoOption(false);
+      }
+      setOptions((p) => ({ ...p, ...object }));
+      toggleWatchLaterVideos(info);
+    } else {
+      navigate("/login", { replace: true, state: { from: location.pathname } });
+    }
+  }
+
+  useEffect(() => {
+    if (isInWatchLaterVideos(videoId)) {
+      const object = watchlaterVideoOption(true);
+      setOptions((p) => ({ ...p, ...object }));
+    }
+  }, []);
 
   return (
     <div
@@ -62,6 +94,15 @@ function VideoCard({ info }) {
           </div>
 
           <div className={`gap-10 ${styles.videoCardOptions}`}>
+            <button
+              className={`cursor-pointer  font-wt-600 ${styles.optionButton}`}
+              onClick={() => toggleWatchLaterOption()}
+            >
+              <span className={`material-icons-outlined`}>
+                {options.watchlaterIconType}
+              </span>
+              {options.watchlaterIconText}
+            </button>
             {optionsInfo.map(({ iconText, iconType }, index) => (
               <button
                 key={index}
