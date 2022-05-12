@@ -14,7 +14,6 @@ function useYoutubeData() {
       const json = await response.json();
       return json;
     } catch (error) {
-      console.error(error);
       throw new Error(error);
     }
   }
