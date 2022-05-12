@@ -1,20 +1,18 @@
-import { videoCardFakeInfo, likedVideosInfo } from "data";
+import { likedVideosInfo } from "data";
 import { SupremeContainer, XRoof, VideoCardList } from "components";
-
-function getFakeVideos() {
-  return Array.from({ length: 30 }, (_, i) => ({
-    ...videoCardFakeInfo,
-    videoId: i,
-  }));
-}
+import { useLikes } from "context";
 
 function LikedVideos() {
-  const videos = getFakeVideos();
+  const { likesState } = useLikes();
 
   return (
     <SupremeContainer
-      headerComponent={<XRoof info={likedVideosInfo} />}
-      bodyComponent={<VideoCardList videos={videos} />}
+      headerComponent={
+        <XRoof
+          info={{ ...likedVideosInfo, videosCount: likesState.videos.length }}
+        />
+      }
+      bodyComponent={<VideoCardList videos={likesState.videos} />}
     />
   );
 }
