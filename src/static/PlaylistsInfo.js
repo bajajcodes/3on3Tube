@@ -5,7 +5,7 @@ const info = {
   iconText: "open_in_new",
 };
 
-const watchLaterInfo = { ...info, headingText: "Watch later" };
+const watchLaterInfo = { ...info, iconText: "", headingText: "Watch later" };
 
 const likedVideosInfo = {
   ...info,
