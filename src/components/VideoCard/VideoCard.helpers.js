@@ -1,9 +1,5 @@
 export const optionsInfo = [
   {
-    iconText: "Like",
-    iconType: "thumb_up",
-  },
-  {
     iconText: "Save To Playlist",
     iconType: "playlist_add",
   },
@@ -37,4 +33,14 @@ export function makeDurationReadable(duration) {
   }
 
   return readable.join(":");
+}
+
+export function likedDislikedVideoOption(liked) {
+  if (liked) {
+    return { likesIconText: "Dislike", likesIconType: "thumb_down" };
+  }
+  return {
+    likesIconText: "Like",
+    likesIconType: "thumb_up",
+  };
 }

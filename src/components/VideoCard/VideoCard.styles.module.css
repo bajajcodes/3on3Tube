@@ -71,6 +71,7 @@
   border: 0;
   gap: var(--size-4);
   display: grid;
+  min-width: calc(var(--size-9) * 4.5);
 }
 
 .videoCardDescription,
