@@ -1,22 +1,12 @@
 import styles from "./Auth.styles.module.css";
-import { useLocation, Navigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { loginFormFields, signupFormFields } from "data";
 import { InputForm } from "components";
-import { useEffect } from "react";
-import { useAuth } from "context";
 
 function Auth() {
   const location = useLocation();
-  const { authState } = useAuth();
   const formFields =
     location.pathname === "/login" ? loginFormFields : signupFormFields;
-
-  useEffect(() => {
-    if (authState.isLoggedIn) {
-      const to = location.state?.from ?? "/videos/explore";
-      <Navigate to={to} replace={true} />;
-    }
-  }, [authState]);
 
   return (
     <main className={styles.auth}>

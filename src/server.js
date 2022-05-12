@@ -24,6 +24,7 @@ import {
 import {
   getLikedVideosHandler,
   addItemToLikedVideos,
+  getItemFromLikedVideos,
   removeItemFromLikedVideos,
 } from "./backend/controllers/LikeController";
 import {
@@ -95,6 +96,7 @@ export function makeServer({ environment = "development" } = {}) {
 
       // likes routes (private)
       this.get("/user/likes", getLikedVideosHandler.bind(this));
+      this.get("/user/likes/:videoId", getItemFromLikedVideos.bind(this));
       this.post("/user/likes", addItemToLikedVideos.bind(this));
       this.delete("/user/likes/:videoId", removeItemFromLikedVideos.bind(this));
 

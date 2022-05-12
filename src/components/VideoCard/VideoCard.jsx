@@ -1,6 +1,9 @@
 import styles from "./VideoCard.styles.module.css";
 import { useNavigate } from "react-router-dom";
-import { optionsInfo,makeDurationReadable } from "./VideoCard.helpers";
+import {
+  optionsInfo,
+  makeDurationReadable,
+} from "./VideoCard.helpers";
 
 function VideoCard({ info }) {
   const {
@@ -52,7 +55,9 @@ function VideoCard({ info }) {
               >
                 timer
               </span>
-              <span className={`${styles.videoCardDuration}`}>{makeDurationReadable(duration)}</span>
+              <span className={`${styles.videoCardDuration}`}>
+                {makeDurationReadable(duration)}
+              </span>
             </div>
           </div>
 

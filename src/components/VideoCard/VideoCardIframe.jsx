@@ -1,18 +1,31 @@
 import styles from "./VideoCard.styles.module.css";
-import { optionsInfo, makeDurationReadable } from "./VideoCard.helpers";
-import { useParams } from "react-router-dom";
+import {
+  optionsInfo,
+  makeDurationReadable,
+  likedDislikedVideoOption,
+} from "./VideoCard.helpers";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useAxios } from "hooks";
+import { useAxios, useLikedVideosData } from "hooks";
+import { useAuth } from "context";
 
 function VideoCardIframe() {
   const params = useParams();
   const [info, setInfo] = useState(null);
+  const [options, setOptions] = useState({
+    likesIconText: "Like",
+    likesIconType: "thumb_up",
+  });
   const {
     response: videoResponse,
     error: videoError,
     loading: videoLoading,
     requestData,
   } = useAxios();
+  const { isLikedVideo, toggleLikesVideo } = useLikedVideosData();
+  const { authState } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(async () => {
     await requestData({
@@ -24,13 +37,31 @@ function VideoCardIframe() {
   useEffect(() => {
     if (!videoLoading) {
       if (videoError === "") {
-        console.info("--->>>getting video<<<---");
         setInfo(videoResponse.video);
+        if (isLikedVideo(videoResponse.video.videoId)) {
+          const object = likedDislikedVideoOption(true);
+          setOptions((p) => ({ ...p, ...object }));
+        }
       } else {
         console.error({ videoError });
       }
     }
   }, [videoLoading]);
+
+  function toggleLikeOption() {
+    if (authState.isLoggedIn) {
+      let object = null;
+      if (options.likesIconText === "Like") {
+        object = likedDislikedVideoOption(true);
+      } else {
+        object = likedDislikedVideoOption(false);
+      }
+      setOptions((p) => ({ ...p, ...object }));
+      toggleLikesVideo(info);
+    } else {
+      navigate("/login", { replace: true, state: { from: location.pathname } });
+    }
+  }
 
   return (
     <>
@@ -85,6 +116,15 @@ function VideoCardIframe() {
               </div>
 
               <div className={`gap-10 ${styles.videoCardOptions}`}>
+                <button
+                  className={`cursor-pointer  font-wt-600 ${styles.optionButton}`}
+                  onClick={() => toggleLikeOption()}
+                >
+                  <span className={`material-icons-outlined`}>
+                    {options.likesIconType}
+                  </span>
+                  {options.likesIconText}
+                </button>
                 {optionsInfo.map(({ iconText, iconType }, index) => (
                   <button
                     key={index}

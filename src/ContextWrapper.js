@@ -1,9 +1,11 @@
-import { AuthProvider, FilterProvider } from "context";
+import { AuthProvider, FilterProvider, LikesProvider } from "context";
 
 function ContextWrapper({ children }) {
   return (
     <AuthProvider>
-      <FilterProvider>{children}</FilterProvider>
+      <FilterProvider>
+        <LikesProvider>{children}</LikesProvider>
+      </FilterProvider>
     </AuthProvider>
   );
 }
