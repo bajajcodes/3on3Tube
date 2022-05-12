@@ -4,9 +4,10 @@ import {
   makeDurationReadable,
   likedDislikedVideoOption,
 } from "./VideoCard.helpers";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAxios, useLikedVideosData } from "hooks";
+import { useAuth } from "context";
 
 function VideoCardIframe() {
   const params = useParams();
@@ -22,6 +23,9 @@ function VideoCardIframe() {
     requestData,
   } = useAxios();
   const { isLikedVideo, toggleLikesVideo } = useLikedVideosData();
+  const { authState } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(async () => {
     await requestData({
@@ -45,14 +49,18 @@ function VideoCardIframe() {
   }, [videoLoading]);
 
   function toggleLikeOption() {
-    let object = null;
-    if (options.likesIconText === "Like") {
-      object = likedDislikedVideoOption(true);
+    if (authState.isLoggedIn) {
+      let object = null;
+      if (options.likesIconText === "Like") {
+        object = likedDislikedVideoOption(true);
+      } else {
+        object = likedDislikedVideoOption(false);
+      }
+      setOptions((p) => ({ ...p, ...object }));
+      toggleLikesVideo(info);
     } else {
-      object = likedDislikedVideoOption(false);
+      navigate("/login", { replace: true, state: { from: location.pathname } });
     }
-    setOptions((p) => ({ ...p, ...object }));
-    toggleLikesVideo(info);
   }
 
   return (
