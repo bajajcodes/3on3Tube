@@ -54,7 +54,7 @@ export const addVideoToHistoryHandler = function (schema, request) {
       );
     }
     const { video } = JSON.parse(request.requestBody);
-    if (user.history.some((item) => item._id === video._id)) {
+    if (user.history.some((item) => item.videoId === video.videoId)) {
       return new Response(
         409,
         {},
@@ -94,7 +94,7 @@ export const removeVideoFromHistoryHandler = function (schema, request) {
       );
     }
     const videoId = request.params.videoId;
-    const filteredHistory = user.history.filter((item) => item._id !== videoId);
+    const filteredHistory = user.history.filter((item) => item.videoId !== videoId);
     this.db.users.update({ history: filteredHistory });
     return new Response(200, {}, { history: filteredHistory });
   } catch (error) {

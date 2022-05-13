@@ -21,6 +21,7 @@ const playlistsInfo = {
 
 const historyInfo = {
   ...info,
+  iconText: "delete_forever",
   headingText: "History",
 };
 

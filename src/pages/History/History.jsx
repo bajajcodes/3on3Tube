@@ -1,18 +1,15 @@
-import { videoCardFakeInfo, historyInfo } from "data";
+import { historyInfo } from "data";
 import { SupremeContainer, XRoof, VideoCardList } from "components";
-
-function getFakeVideos() {
-  return Array.from({ length: 30 }, (_, i) => ({
-    ...videoCardFakeInfo,
-    videoId: i,
-  }));
-}
+import { useHistory } from "context";
 
 function History() {
-  const videos = getFakeVideos();
+  const { videos } = useHistory();
+
   return (
     <SupremeContainer
-      headerComponent={<XRoof info={historyInfo} />}
+      headerComponent={
+        <XRoof info={{ ...historyInfo, videosCount: videos.length }} />
+      }
       bodyComponent={<VideoCardList videos={videos} />}
     />
   );
