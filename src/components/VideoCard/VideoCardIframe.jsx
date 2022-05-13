@@ -7,7 +7,12 @@ import {
 } from "./VideoCard.helpers";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useAxios, useLikedVideosData, useWatchLaterData } from "hooks";
+import {
+  useAxios,
+  useLikedVideosData,
+  useWatchLaterData,
+  useHistoryData,
+} from "hooks";
 import { useAuth } from "context";
 
 function VideoCardIframe() {
@@ -27,6 +32,7 @@ function VideoCardIframe() {
   } = useAxios();
   const { isLikedVideo, toggleLikesVideo } = useLikedVideosData();
   const { isInWatchLaterVideos, toggleWatchLaterVideos } = useWatchLaterData();
+  const { toggleHistoryVideos } = useHistoryData();
   const { authState } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -50,11 +56,15 @@ function VideoCardIframe() {
           const object = watchlaterVideoOption(true);
           setOptions((p) => ({ ...p, ...object }));
         }
+        if (authState.isLoggedIn) {
+          toggleHistoryVideos(videoResponse.video);
+        }
       } else {
         console.error({ videoError });
       }
     }
   }, [videoLoading]);
+
 
   function toggleLikeOption() {
     if (authState.isLoggedIn) {

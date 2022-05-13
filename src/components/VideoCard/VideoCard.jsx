@@ -5,8 +5,8 @@ import {
   watchlaterVideoOption,
 } from "./VideoCard.helpers";
 import { useAuth } from "context";
-import { useWatchLaterData } from "hooks";
-import { useNavigate } from "react-router-dom";
+import { useWatchLaterData, useHistoryData } from "hooks";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function VideoCard({ info }) {
@@ -25,7 +25,9 @@ function VideoCard({ info }) {
   });
   const { authState } = useAuth();
   const { isInWatchLaterVideos, toggleWatchLaterVideos } = useWatchLaterData();
+  const { deleteFromHistoryVideos } = useHistoryData();
   const navigate = useNavigate();
+  const location = useLocation();
 
   function toggleWatchLaterOption() {
     if (authState.isLoggedIn) {
@@ -39,6 +41,12 @@ function VideoCard({ info }) {
       toggleWatchLaterVideos(info);
     } else {
       navigate("/login", { replace: true, state: { from: location.pathname } });
+    }
+  }
+
+  function deleteOptionAction() {
+    if (location.pathname.includes("history")) {
+      deleteFromHistoryVideos(videoId);
     }
   }
 
@@ -112,6 +120,15 @@ function VideoCard({ info }) {
                 {iconText}
               </button>
             ))}
+            {location.pathname.includes("history") && (
+              <button
+                className={`cursor-pointer  font-wt-600 delete ${styles.optionButton}`}
+                onClick={() => deleteOptionAction()}
+              >
+                <span className={`material-icons-outlined delete`}>delete</span>
+                Delete
+              </button>
+            )}
           </div>
         </div>
       </div>
