@@ -36,7 +36,7 @@
 }
 
 .borderNormal {
-  border: var(--size-1) solid var(--nice-gray);
+  border: var(--size-2) solid var(--nice-gray);
 }
 
 .gap-10 {

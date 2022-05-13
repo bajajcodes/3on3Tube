@@ -16,3 +16,7 @@ html {
 ::selection {
   color: var(--complementary);
 }
+
+.delete:hover {
+  color: var(--complementary);
+}
