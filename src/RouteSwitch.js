@@ -46,8 +46,22 @@ function RouteSwitch() {
           }
         />
         <Route path="playlists" element={<Playlists />} />
-        <Route path="history" element={<History />} />
-        <Route path="later" element={<WatchLater />} />
+        <Route
+          path="history"
+          element={
+            <RequiresAuth>
+              <History />
+            </RequiresAuth>
+          }
+        />
+        <Route
+          path="later"
+          element={
+            <RequiresAuth>
+              <WatchLater />
+            </RequiresAuth>
+          }
+        />
         <Route path="watch/:videoId" element={<VideoCardIframe />} />
       </Route>
       <Route path="/mockman" element={<Mockman />} />

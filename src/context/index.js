@@ -5,3 +5,4 @@ export {
   WatchLaterProvider,
   useWatchLater,
 } from "./WatchLater/WatchLater.context";
+export { HistoryProvider, useHistory } from "./History/History.context";

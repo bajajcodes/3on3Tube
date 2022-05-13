@@ -3,6 +3,7 @@ import {
   FilterProvider,
   LikesProvider,
   WatchLaterProvider,
+  HistoryProvider,
 } from "context";
 
 function ContextWrapper({ children }) {
@@ -10,7 +11,9 @@ function ContextWrapper({ children }) {
     <AuthProvider>
       <FilterProvider>
         <LikesProvider>
-          <WatchLaterProvider>{children}</WatchLaterProvider>
+          <WatchLaterProvider>
+            <HistoryProvider>{children}</HistoryProvider>
+          </WatchLaterProvider>
         </LikesProvider>
       </FilterProvider>
     </AuthProvider>
