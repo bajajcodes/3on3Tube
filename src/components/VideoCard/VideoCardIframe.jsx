@@ -1,11 +1,12 @@
 import styles from "./VideoCard.styles.module.css";
 import {
-  optionsInfo,
   makeDurationReadable,
   likedDislikedVideoOption,
   watchlaterVideoOption,
 } from "./VideoCard.helpers";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useVideoCardHelper } from "./VideoCard.helper.hook";
+import { PlaylistsModal } from "components";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
   useAxios,
@@ -24,18 +25,23 @@ function VideoCardIframe() {
     watchlaterIconText: "Watch Later",
     watchlaterIconType: "watch_later",
   });
+  const [isModalRequired, setIsModalRequired] = useState(false);
   const {
     response: videoResponse,
     error: videoError,
     loading: videoLoading,
     requestData,
   } = useAxios();
-  const { isLikedVideo, toggleLikesVideo } = useLikedVideosData();
-  const { isInWatchLaterVideos, toggleWatchLaterVideos } = useWatchLaterData();
+  const { isLikedVideo } = useLikedVideosData();
+  const { isInWatchLaterVideos } = useWatchLaterData();
+  const {
+    toggleWatchLaterOption,
+    playlistOptionActionFalse,
+    playlistOptionActionTrue,
+    toggleLikeOption,
+  } = useVideoCardHelper(options, setOptions, setIsModalRequired);
   const { toggleHistoryVideos } = useHistoryData();
   const { authState } = useAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(async () => {
     await requestData({
@@ -64,37 +70,6 @@ function VideoCardIframe() {
       }
     }
   }, [videoLoading]);
-
-
-  function toggleLikeOption() {
-    if (authState.isLoggedIn) {
-      let object = null;
-      if (options.likesIconText === "Like") {
-        object = likedDislikedVideoOption(true);
-      } else {
-        object = likedDislikedVideoOption(false);
-      }
-      setOptions((p) => ({ ...p, ...object }));
-      toggleLikesVideo(info);
-    } else {
-      navigate("/login", { replace: true, state: { from: location.pathname } });
-    }
-  }
-
-  function toggleWatchLaterOption() {
-    if (authState.isLoggedIn) {
-      let object = null;
-      if (options.watchlaterIconType === "watch_later") {
-        object = watchlaterVideoOption(true);
-      } else {
-        object = watchlaterVideoOption(false);
-      }
-      setOptions((p) => ({ ...p, ...object }));
-      toggleWatchLaterVideos(info);
-    } else {
-      navigate("/login", { replace: true, state: { from: location.pathname } });
-    }
-  }
 
   return (
     <>
@@ -151,7 +126,7 @@ function VideoCardIframe() {
               <div className={`gap-10 ${styles.videoCardOptions}`}>
                 <button
                   className={`cursor-pointer  font-wt-600 ${styles.optionButton}`}
-                  onClick={() => toggleLikeOption()}
+                  onClick={() => toggleLikeOption(info)}
                 >
                   <span className={`material-icons-outlined`}>
                     {options.likesIconType}
@@ -160,24 +135,22 @@ function VideoCardIframe() {
                 </button>
                 <button
                   className={`cursor-pointer  font-wt-600 ${styles.optionButton}`}
-                  onClick={() => toggleWatchLaterOption()}
+                  onClick={() => toggleWatchLaterOption(info)}
                 >
                   <span className={`material-icons-outlined`}>
                     {options.watchlaterIconType}
                   </span>
                   {options.watchlaterIconText}
                 </button>
-                {optionsInfo.map(({ iconText, iconType }, index) => (
-                  <button
-                    key={index}
-                    className={`cursor-pointer  font-wt-600 ${styles.optionButton}`}
-                  >
-                    <span className={`material-icons-outlined`}>
-                      {iconType}
-                    </span>
-                    {iconText}
-                  </button>
-                ))}
+                <button
+                  className={`cursor-pointer  font-wt-600 ${styles.optionButton}`}
+                  onClick={(e) => playlistOptionActionTrue(e)}
+                >
+                  <span className={`material-icons-outlined`}>
+                    playlist_add
+                  </span>
+                  Save To Playlist
+                </button>
               </div>
 
               <span className={`${styles.videoCardDescription}`}>
@@ -185,6 +158,11 @@ function VideoCardIframe() {
               </span>
             </div>
           </div>
+          <PlaylistsModal
+            display={isModalRequired}
+            displayHandler={playlistOptionActionFalse}
+            video={info}
+          />
         </div>
       )}
       {info === null && <h1>Loading...</h1>}
