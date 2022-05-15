@@ -63,7 +63,7 @@ const navActionItems = [
     linkTo: "/videos/explore",
   },
   {
-    itemText: "Liked Videos",
+    itemText: "Liked",
     itemIconType: "thumb_up",
     isFlexDirectionColumn: false,
     linkTo: "/videos/liked",

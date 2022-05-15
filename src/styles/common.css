@@ -11,6 +11,8 @@ html {
   --complementary: #ea5338;
   --nice-gray: #444444;
   --muted-text: #666666;
+  --modal-background-color: rgba(0, 0, 0, 0.4);
+  --modal-close:#aaaaaa;
 }
 
 ::selection {
@@ -20,3 +22,24 @@ html {
 .delete:hover {
   color: var(--complementary);
 }
+
+.linkTo:hover{
+  color: var(--logo-color);
+}
+
+.dnone {
+  display: none;
+}
+
+.dblock {
+  display: block;
+}
+
+.gap-5 {
+  gap: 10px;
+}
+
+.w100{
+  width: 100%;
+}
+
