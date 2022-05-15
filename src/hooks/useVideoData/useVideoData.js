@@ -20,19 +20,30 @@ function useVideoData() {
     });
   }
 
-  function postData(endpoint, video) {
+  function postData(endpoint, video, playlist) {
     const token = getValue("token") ?? false;
     if (!token) {
       throw new Error("Token does not exist, login first.");
     }
-    requestData({
-      url: `/api/user/${endpoint}`,
-      method: "post",
-      data: { video },
-      headers: {
-        authorization: token,
-      },
-    });
+    if (video) {
+      requestData({
+        url: `/api/user/${endpoint}`,
+        method: "post",
+        data: { video },
+        headers: {
+          authorization: token,
+        },
+      });
+    } else {
+      requestData({
+        url: `/api/user/${endpoint}`,
+        method: "post",
+        data: { playlist },
+        headers: {
+          authorization: token,
+        },
+      });
+    }
   }
 
   function deleteData(endpoint) {
@@ -51,7 +62,7 @@ function useVideoData() {
 
   useEffect(() => {
     if (!loading && error === "") {
-      setData(response);
+      setData({...response});
     } else if (!loading) {
       console.error({ error, response });
     }
