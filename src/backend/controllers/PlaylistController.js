@@ -46,6 +46,15 @@ export const addNewPlaylistHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   if (user) {
     const { playlist } = JSON.parse(request.requestBody);
+    if (user.playlists.some((item) => item.title === playlist.title)) {
+      return new Response(
+        409,
+        {},
+        {
+          errors: ["The playlist is already in your playlists"],
+        }
+      );
+    }
     user.playlists.push({ ...playlist, videos: [], _id: uuid() });
     return new Response(201, {}, { playlists: user.playlists });
   }

@@ -13,7 +13,7 @@ function PlaylistsModal({ display = false, displayHandler, video = null }) {
   function postNewPlaylist(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const title = [...formData.values()][0] ?? "";
+    const title = [...formData.values()][0]?.trim() ?? "";
     if (title) {
       addPlaylistToPlaylists({
         title,
