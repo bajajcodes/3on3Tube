@@ -1,11 +1,11 @@
 import styles from "./VideoCard.styles.module.css";
 import {
-  optionsInfo,
   makeDurationReadable,
   watchlaterVideoOption,
 } from "./VideoCard.helpers";
-import { useAuth } from "context";
-import { useWatchLaterData, useHistoryData } from "hooks";
+import { useVideoCardHelper } from "./VideoCard.helper.hook";
+import { PlaylistsModal } from "components";
+import { useWatchLaterData } from "hooks";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -23,32 +23,16 @@ function VideoCard({ info }) {
     watchlaterIconText: "Watch Later",
     watchlaterIconType: "watch_later",
   });
-  const { authState } = useAuth();
-  const { isInWatchLaterVideos, toggleWatchLaterVideos } = useWatchLaterData();
-  const { deleteFromHistoryVideos } = useHistoryData();
+  const [isModalRequired, setIsModalRequired] = useState(false);
+  const { isInWatchLaterVideos } = useWatchLaterData();
+  const {
+    toggleWatchLaterOption,
+    playlistOptionActionFalse,
+    playlistOptionActionTrue,
+    deleteOptionAction,
+  } = useVideoCardHelper(options, setOptions, setIsModalRequired);
   const navigate = useNavigate();
   const location = useLocation();
-
-  function toggleWatchLaterOption() {
-    if (authState.isLoggedIn) {
-      let object = null;
-      if (options.watchlaterIconType === "watch_later") {
-        object = watchlaterVideoOption(true);
-      } else {
-        object = watchlaterVideoOption(false);
-      }
-      setOptions((p) => ({ ...p, ...object }));
-      toggleWatchLaterVideos(info);
-    } else {
-      navigate("/login", { replace: true, state: { from: location.pathname } });
-    }
-  }
-
-  function deleteOptionAction() {
-    if (location.pathname.includes("history")) {
-      deleteFromHistoryVideos(videoId);
-    }
-  }
 
   useEffect(() => {
     if (isInWatchLaterVideos(videoId)) {
@@ -104,26 +88,25 @@ function VideoCard({ info }) {
           <div className={`gap-10 ${styles.videoCardOptions}`}>
             <button
               className={`cursor-pointer  font-wt-600 ${styles.optionButton}`}
-              onClick={() => toggleWatchLaterOption()}
+              onClick={() => toggleWatchLaterOption(info)}
             >
               <span className={`material-icons-outlined`}>
                 {options.watchlaterIconType}
               </span>
               {options.watchlaterIconText}
             </button>
-            {optionsInfo.map(({ iconText, iconType }, index) => (
-              <button
-                key={index}
-                className={`cursor-pointer  font-wt-600 ${styles.optionButton}`}
-              >
-                <span className={`material-icons-outlined`}>{iconType}</span>
-                {iconText}
-              </button>
-            ))}
-            {location.pathname.includes("history") && (
+            <button
+              className={`cursor-pointer  font-wt-600 ${styles.optionButton}`}
+              onClick={(e) => playlistOptionActionTrue(e)}
+            >
+              <span className={`material-icons-outlined`}>playlist_add</span>
+              Save To Playlist
+            </button>
+            {(location.pathname.includes("history") ||
+              location.pathname.includes("playlists")) && (
               <button
                 className={`cursor-pointer  font-wt-600 delete ${styles.optionButton}`}
-                onClick={() => deleteOptionAction()}
+                onClick={() => deleteOptionAction(videoId)}
               >
                 <span className={`material-icons-outlined delete`}>delete</span>
                 Delete
@@ -132,6 +115,11 @@ function VideoCard({ info }) {
           </div>
         </div>
       </div>
+      <PlaylistsModal
+        display={isModalRequired}
+        displayHandler={playlistOptionActionFalse}
+        video={info}
+      />
     </div>
   );
 }

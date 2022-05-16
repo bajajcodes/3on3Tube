@@ -5,6 +5,7 @@ import {
   Explore,
   LikedVideos,
   Playlists,
+  Playlist,
   History,
   WatchLater,
   Videos,
@@ -12,7 +13,6 @@ import {
 import { Routes, Route } from "react-router-dom";
 import { CheckAuth } from "CheckAuth";
 import { RequiresAuth } from "RequiresAuth";
-import Mockman from "mockman-js";
 
 function RouteSwitch() {
   return (
@@ -45,7 +45,22 @@ function RouteSwitch() {
             </RequiresAuth>
           }
         />
-        <Route path="playlists" element={<Playlists />} />
+        <Route
+          path="playlists"
+          element={
+            <RequiresAuth>
+              <Playlists />
+            </RequiresAuth>
+          }
+        />
+        <Route
+          path="playlists/:playlistId"
+          element={
+            <RequiresAuth>
+              <Playlist />
+            </RequiresAuth>
+          }
+        />
         <Route
           path="history"
           element={
@@ -64,7 +79,6 @@ function RouteSwitch() {
         />
         <Route path="watch/:videoId" element={<VideoCardIframe />} />
       </Route>
-      <Route path="/mockman" element={<Mockman />} />
     </Routes>
   );
 }

@@ -1,36 +1,23 @@
 import { playlistsInfo } from "data";
 import { SupremeContainer, XRoof } from "components";
-
-function PlaylistList() {
-  return (
-    <>
-      <XRoof
-        info={{ ...playlistsInfo, showVideosCount: true }}
-        classlist={["borderNormal"]}
-      />
-      <XRoof
-        info={{ ...playlistsInfo, showVideosCount: true }}
-        classlist={["borderNormal"]}
-      />
-      <XRoof
-        info={{ ...playlistsInfo, showVideosCount: true }}
-        classlist={["borderNormal"]}
-      />
-      <XRoof
-        info={{ ...playlistsInfo, showVideosCount: true }}
-        classlist={["borderNormal"]}
-      />
-    </>
-  );
-}
+import { usePlaylists, useWatchLater, useLikes } from "context";
+import { PlaylistList } from "./PlaylistList";
 
 function Playlists() {
+  const { playlists } = usePlaylists();
+  const { videos: watchlaterVideos } = useWatchLater();
+  const {
+    likesState: { videos: likedVideos },
+  } = useLikes();
+
   return (
     <SupremeContainer
       type="playlists"
       headerComponent={<XRoof info={{ ...playlistsInfo, iconText: "" }} />}
       bodyClasses="dgrid dgridSupremeContainerBody"
-      bodyComponent={<PlaylistList />}
+      bodyComponent={
+        <PlaylistList info={{ watchlaterVideos, likedVideos, playlists }} />
+      }
     />
   );
 }

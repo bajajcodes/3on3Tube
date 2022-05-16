@@ -1,9 +1,3 @@
-const optionsInfo = [
-  {
-    iconText: "Save To Playlist",
-    iconType: "playlist_add",
-  },
-];
 
 function makeDurationReadable(duration) {
   const readable = [];
@@ -56,5 +50,4 @@ export {
   watchlaterVideoOption,
   likedDislikedVideoOption,
   makeDurationReadable,
-  optionsInfo,
 };
