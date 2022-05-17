@@ -1,16 +1,18 @@
-import { SupremeContainer, XRoof, VideoCardList } from "components";
+import { SupremeContainer, XRoof, VideoCardList, Loader } from "components";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { usePlaylists } from "context";
 
 function Playlist() {
   const [playlist, setPlaylist] = useState({ videos: [] });
+  const [loaderDisplay, setLoaderDisplay] = useState(true);
   const { playlists } = usePlaylists();
   const params = useParams();
 
   useEffect(() => {
     const playlist = playlists.find((p) => p._id === params.playlistId);
     setPlaylist((p) => ({ ...p, ...playlist }));
+    setLoaderDisplay(false);
   }, []);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ function Playlist() {
           bodyComponent={<VideoCardList videos={playlist.videos} />}
         />
       )}
-      {!playlist?.title && <h1>Loading...</h1>}
+      {!playlist?.title && <Loader display={loaderDisplay} />}
     </>
   );
 }
