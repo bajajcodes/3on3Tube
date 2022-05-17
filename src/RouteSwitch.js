@@ -9,6 +9,7 @@ import {
   History,
   WatchLater,
   Videos,
+  NotFound,
 } from "pages";
 import { Routes, Route } from "react-router-dom";
 import { CheckAuth } from "CheckAuth";
@@ -78,6 +79,7 @@ function RouteSwitch() {
           }
         />
         <Route path="watch/:videoId" element={<VideoCardIframe />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

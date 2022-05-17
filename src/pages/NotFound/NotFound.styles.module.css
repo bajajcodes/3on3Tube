@@ -1,0 +1,18 @@
+.containerNFP {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap:var(--size-9);
+}
+
+.gohome{
+    border: 2px solid var(--nice-gray);
+    padding: var(--size-3);
+    cursor: pointer;
+    background: transparent;
+}
+
+.gohome:hover{
+    background: var(--logo-color);
+}
