@@ -16,11 +16,11 @@ function Header() {
 
   return (
     <header className={styles.headerWrapper}>
-      <div className="dflex">
+      <div className={`dflex ${styles.heroWrapper}`}>
         <Hero />
       </div>
       {location.pathname === "/videos/explore" && (
-        <div>
+        <div className={styles.searchBarWrapper}>
           <SearchBar />
         </div>
       )}
