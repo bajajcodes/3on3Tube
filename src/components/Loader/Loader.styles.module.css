@@ -1,0 +1,29 @@
+.loaderContainer {
+  background: var(--white);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.loader {
+  border: var(--size-4) solid var(--nice-gray);
+  border-top: var(--size-4) solid var(--logo-color);
+  border-radius: 50%;
+  width: calc(var(--size-9) * 3.2);
+  height: calc(var(--size-9) * 3.2);
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
