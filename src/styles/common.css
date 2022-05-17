@@ -12,7 +12,7 @@ html {
   --nice-gray: #444444;
   --muted-text: #666666;
   --modal-background-color: rgba(0, 0, 0, 0.4);
-  --modal-close:#aaaaaa;
+  --modal-close: #aaaaaa;
 }
 
 ::selection {
@@ -23,7 +23,7 @@ html {
   color: var(--complementary);
 }
 
-.linkTo:hover{
+.linkTo:hover {
   color: var(--logo-color);
 }
 
@@ -39,7 +39,21 @@ html {
   gap: 10px;
 }
 
-.w100{
+.w100 {
   width: 100%;
 }
 
+.alertDisplay {
+  position: fixed;
+  top: 10vh;
+  right: 0;
+  width: 300px;
+  word-wrap: break-word;
+}
+
+.link{
+  color: var(--black);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: medium;
+}
