@@ -3,6 +3,7 @@ import { Header, Footer } from "components";
 import { ContextWrapper } from "ContextWrapper";
 import { BrowserRouter } from "react-router-dom";
 import { RouteSwitch } from "./RouteSwitch";
+import { ScrollToTop } from "utils";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <BrowserRouter>
         <ContextWrapper>
           <Header />
+          <ScrollToTop />
           <RouteSwitch />
           <Footer />
         </ContextWrapper>
