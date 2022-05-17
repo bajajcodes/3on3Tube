@@ -3,7 +3,6 @@ import { useInputField } from "./useInputField.hook";
 
 function InputField({ fieldMetaInfo }) {
   const { fieldState, toggleIcon } = useInputField(fieldMetaInfo);
-
   return (
     <label
       className={`${styles.inputFieldWrapper}`}
@@ -31,9 +30,9 @@ function InputField({ fieldMetaInfo }) {
       <input
         className={`p-sm ${styles.inputField}`}
         name={fieldMetaInfo?.name ?? "No Name"}
-        type={fieldState.inputType}
-        placeholder={fieldMetaInfo?.placeholderText || ""}
-        autoComplete="on"
+        type={fieldState?.inputType ?? "text"}
+        placeholder={fieldMetaInfo?.placeholderText ?? ""}
+        autoComplete="off"
       />
     </label>
   );

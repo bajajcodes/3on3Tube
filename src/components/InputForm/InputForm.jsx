@@ -1,8 +1,8 @@
 import styles from "./InputForm.styles.module.css";
-import { InputField } from "components";
+import { InputField, Alert } from "components";
 import { Link } from "react-router-dom";
 import { useForm } from "./useForm.hook";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAxios } from "hooks";
 import { useAuth } from "context";
 
@@ -16,7 +16,11 @@ function InputForm({ formFields }) {
     linkTo,
   } = formFields;
   const url = `/api/auth/${linkTo === "/login" ? "signup" : "login"}`;
-
+  const [alertOptions, setAlertOptions] = useState({
+    type: "happy",
+    show: false,
+    message: "",
+  });
   const { formState, handleFormSubmit } = useForm();
   const { response, error, loading, requestData } = useAxios();
   const { authDispatch } = useAuth();
@@ -26,22 +30,41 @@ function InputForm({ formFields }) {
       await requestData({
         method: "post",
         url,
-        data:{...formState.response},
+        data: { ...formState.response },
       });
     } else if (formState.isValidated && formState.error === true) {
-      console.error(formState.response?.error);
+      setAlertOptions({
+        type: "unhappy",
+        show: true,
+        message: formState.response?.error ?? "NA FormState",
+      });
     }
   }, [formState]);
 
   useEffect(() => {
     if (!loading) {
       if (error !== "") {
-        console.error({ response, error });
+        setAlertOptions({
+          type: "unhappy",
+          show: true,
+          message: error?.errors[0] ?? "NA Axios",
+        });
       } else {
+        setAlertOptions((p) => ({
+          ...p,
+          show: true,
+          message: `${
+            linkTo === "/login" ? "Signup" : "login"
+          } successfully done.`,
+        }));
         authDispatch({ type: "LOG_IN", payload: response.encodedToken });
       }
     }
   }, [loading]);
+
+  function toggleShow() {
+    setAlertOptions((p) => ({ ...p, show: false }));
+  }
 
   return (
     <div className={styles.formWrapper}>
@@ -79,6 +102,7 @@ function InputForm({ formFields }) {
           </span>
         </div>
       </form>
+      <Alert alertOptions={alertOptions} toggleShow={toggleShow} />
     </div>
   );
 }
