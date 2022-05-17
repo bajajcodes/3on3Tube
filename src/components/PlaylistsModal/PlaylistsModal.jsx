@@ -1,4 +1,5 @@
 import styles from "./PlaylistsModal.styles.module.css";
+import { Alert } from "components";
 import { usePlaylistsData } from "hooks";
 import { usePlaylists } from "context";
 import { useEffect, useState } from "react";
@@ -6,6 +7,11 @@ import { useEffect, useState } from "react";
 function PlaylistsModal({ display = false, displayHandler, video = null }) {
   const [modalDisplay, setModalDisplay] = useState(display);
   const [createNewPlaylist, setCreateNewPlaylist] = useState(false);
+  const [alertOptions, setAlertOptions] = useState({
+    type: "happy",
+    show: false,
+    message: "",
+  });
   const { addPlaylistToPlaylists, isVideoInPlaylist, togglePlaylistVideo } =
     usePlaylistsData();
   const { playlists } = usePlaylists();
@@ -14,27 +20,65 @@ function PlaylistsModal({ display = false, displayHandler, video = null }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const title = [...formData.values()][0]?.trim() ?? "";
-    if (title) {
+    if (title && !isPlaylistPresent(title)) {
       addPlaylistToPlaylists({
         title,
         description: "A newly created playlist using playlists modal",
       });
       setCreateNewPlaylist(false);
+      setAlertOptions((p) => ({
+        ...p,
+        type: "happy",
+        show: true,
+        message: `Playlist ${title} created`,
+      }));
     } else {
-      console.error("Empty playlist title.");
+      setAlertOptions((p) => ({
+        ...p,
+        type: "unhappy",
+        show: true,
+        message: `Empty playlist title or Playlist already exist`,
+      }));
     }
   }
 
   async function postVideoToPlaylist(_id) {
     if (video) {
       togglePlaylistVideo(_id, video);
-    }else{
-      console.error("Video not available, for add to playlist");
+      let type = "happy";
+      let message = `${video.title} added to playlist`;
+      if (isVideoInPlaylist(_id)) {
+        type = "unhappy";
+        message = `${video.title} removed from playlist`;
+      }
+      setAlertOptions((p) => ({
+        ...p,
+        type: type,
+        show: true,
+        message: message,
+      }));
+    } else {
+      setAlertOptions((p) => ({
+        ...p,
+        type: "unhappy",
+        show: true,
+        message: `Video not available, for add to playlist`,
+      }));
     }
   }
 
   function isVideoPresentInPlaylist(_id) {
-    return isVideoInPlaylist(_id, video.videoId);
+    return playlists
+      .find((playlist) => playlist._id === _id)
+      .videos.some((v) => v.videoId === video.videoId);
+  }
+
+  function isPlaylistPresent(title) {
+    return playlists.some((playlist) => playlist.title === title);
+  }
+
+  function toggleShow() {
+    setAlertOptions((p) => ({ ...p, show: false }));
   }
 
   useEffect(() => {
@@ -113,6 +157,7 @@ function PlaylistsModal({ display = false, displayHandler, video = null }) {
           )}
         </section>
       </section>
+      <Alert alertOptions={alertOptions} toggleShow={toggleShow} />
     </section>
   );
 }

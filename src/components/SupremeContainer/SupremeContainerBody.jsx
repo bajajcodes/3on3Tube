@@ -1,6 +1,6 @@
 function SupremeContainerBody({ extraPowers, Component }) {
   return (
-    <section className={`p-sm supremeContainerBody ${extraPowers}`}>
+    <section className={`supremeContainerBody ${extraPowers}`}>
       {Component}
     </section>
   );

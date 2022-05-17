@@ -14,3 +14,5 @@ export { VideoCard } from "./VideoCard/VideoCard";
 export { VideoCardList } from "./VideoCardList/VideoCardList";
 export { VideoCardIframe } from "./VideoCard/VideoCardIframe";
 export { PlaylistsModal } from "./PlaylistsModal/PlaylistsModal";
+export { Loader } from "./Loader/Loader";
+export { Alert } from "./Alert/Alert";
