@@ -1,6 +1,15 @@
 import { VideoCard } from "../VideoCard/VideoCard";
+import { Loader } from "components";
+import { useState, useEffect } from "react";
 
 function VideoCardList({ videos, videosLoading }) {
+  const [loaderDisplay, setLoaderDisplay] = useState(true);
+
+  useEffect(() => {
+    if (!videosLoading) {
+      setLoaderDisplay(false);
+    }
+  }, [videosLoading]);
   return (
     <>
       {videosLoading !== true && (
@@ -10,7 +19,7 @@ function VideoCardList({ videos, videosLoading }) {
           ))}
         </ul>
       )}
-      {videosLoading === true && videos.length === 0 && <h1>Loading...</h1>}
+      {videosLoading === true && <Loader display={loaderDisplay} />}
       {videosLoading !== true && videos.length === 0 && (
         <h1>No Videos Found</h1>
       )}

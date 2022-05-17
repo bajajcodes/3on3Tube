@@ -4,7 +4,7 @@ import {
   watchlaterVideoOption,
 } from "./VideoCard.helpers";
 import { useVideoCardHelper } from "./VideoCard.helper.hook";
-import { PlaylistsModal } from "components";
+import { PlaylistsModal, Alert } from "components";
 import { useWatchLaterData } from "hooks";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -30,6 +30,8 @@ function VideoCard({ info }) {
     playlistOptionActionFalse,
     playlistOptionActionTrue,
     deleteOptionAction,
+    alertOptions,
+    toggleShow,
   } = useVideoCardHelper(options, setOptions, setIsModalRequired);
   const navigate = useNavigate();
   const location = useLocation();
@@ -120,6 +122,7 @@ function VideoCard({ info }) {
         displayHandler={playlistOptionActionFalse}
         video={info}
       />
+      <Alert alertOptions={alertOptions} toggleShow={toggleShow} />
     </div>
   );
 }

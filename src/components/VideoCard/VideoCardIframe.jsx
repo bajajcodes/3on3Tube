@@ -5,7 +5,7 @@ import {
   watchlaterVideoOption,
 } from "./VideoCard.helpers";
 import { useVideoCardHelper } from "./VideoCard.helper.hook";
-import { PlaylistsModal } from "components";
+import { PlaylistsModal, Loader, Alert } from "components";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
@@ -26,6 +26,7 @@ function VideoCardIframe() {
     watchlaterIconType: "watch_later",
   });
   const [isModalRequired, setIsModalRequired] = useState(false);
+  const [loaderDisplay, setLoaderDisplay] = useState(true);
   const {
     response: videoResponse,
     error: videoError,
@@ -39,6 +40,9 @@ function VideoCardIframe() {
     playlistOptionActionFalse,
     playlistOptionActionTrue,
     toggleLikeOption,
+    alertOptions,
+    setAlertOptions,
+    toggleShow,
   } = useVideoCardHelper(options, setOptions, setIsModalRequired);
   const { toggleHistoryVideos } = useHistoryData();
   const { authState } = useAuth();
@@ -54,6 +58,7 @@ function VideoCardIframe() {
     if (!videoLoading) {
       if (videoError === "") {
         setInfo(videoResponse.video);
+        setLoaderDisplay(false);
         if (isLikedVideo(videoResponse.video.videoId)) {
           const object = likedDislikedVideoOption(true);
           setOptions((p) => ({ ...p, ...object }));
@@ -66,7 +71,7 @@ function VideoCardIframe() {
           toggleHistoryVideos(videoResponse.video);
         }
       } else {
-        console.error({ videoError });
+        setAlertOptions(p => ({...p, type:"unhappy", show:true, message:videoError}))
       }
     }
   }, [videoLoading]);
@@ -165,7 +170,8 @@ function VideoCardIframe() {
           />
         </div>
       )}
-      {info === null && <h1>Loading...</h1>}
+      {info === null && <Loader display={loaderDisplay} />}
+      <Alert alertOptions={alertOptions} toggleShow={toggleShow} />
     </>
   );
 }
