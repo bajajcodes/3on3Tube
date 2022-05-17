@@ -32,7 +32,7 @@ function Videos() {
         >
           close
         </span>
-        <ul onClick={(e) => makeNavToggle(e)}>
+        <ul onClick={(e) => makeNavToggle(e)} className={`dgrid gap-10`}>
           {navActionItems.map((actionItemInfo, index) => (
             <ActionItem actionItemInfo={actionItemInfo} key={index} />
           ))}

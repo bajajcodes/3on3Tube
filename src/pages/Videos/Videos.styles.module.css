@@ -5,7 +5,7 @@
 .headerHamburger {
   position: absolute;
   cursor: pointer;
-  top: var(--size-15);
+  top: var(--size-9);
   background: var(--logo-color);
   border: var(--size-1) solid;
   border-radius: 50%;
@@ -39,7 +39,7 @@
 }
 
 .videosNav > * {
-  gap: var(--size-4);
+  gap: var(--size-9);
   justify-content: flex-start;
   padding-right: var(--size-1);
 }
@@ -52,7 +52,7 @@
     grid-template-columns: auto 3fr;
   }
 
-  .videosNav:nth-child(3){
+  .videosNav:nth-child(3) {
     grid-area: content;
   }
 
