@@ -1,9 +1,12 @@
 .videoCardContainer {
   overflow-wrap: anywhere;
+  background: var(--white);
 }
 
 .videoCardContainerMW {
   max-width: calc(var(--size-16) * 10.5);
+  margin: auto;
+  background: var(--white);
 }
 
 .videoCard {
@@ -94,6 +97,9 @@
 .videoCardDescription {
   line-height: 1.6;
   white-space: break-spaces;
+  height: 200px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 @media (min-width: 700px) {

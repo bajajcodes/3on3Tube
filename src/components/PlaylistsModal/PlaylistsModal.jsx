@@ -46,11 +46,12 @@ function PlaylistsModal({ display = false, displayHandler, video = null }) {
     if (video) {
       togglePlaylistVideo(_id, video);
       let type = "happy";
-      let message = `${video.title} added to playlist`;
-      if (isVideoInPlaylist(_id)) {
-        type = "unhappy";
-        message = `${video.title} removed from playlist`;
-      }
+      let message = "Playlist updated";
+      // let message = `${video.title} added to playlist`;
+      // if (isVideoInPlaylist(_id)) {
+      //   type = "unhappy";
+      //   message = `${video.title} removed from playlist`;
+      // }
       setAlertOptions((p) => ({
         ...p,
         type: type,

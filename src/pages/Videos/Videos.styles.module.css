@@ -1,5 +1,6 @@
 .videosMain {
   min-height: 80vh;
+  background-color: var(--background-color);
 }
 
 .headerHamburger {
@@ -11,6 +12,7 @@
   border-radius: 50%;
   padding: var(--size-3);
   right: var(--size-6);
+  z-index: 999;
 }
 
 .videosNav {
@@ -21,6 +23,7 @@
   bottom: 0;
   right: 0;
   background: var(--white);
+  z-index: 996;
 }
 
 .navCloseOption {
@@ -49,11 +52,27 @@
     grid-area: content;
     display: grid;
     grid-template-areas: "navigation content";
+    grid-template-areas: "content";
     grid-template-columns: auto 3fr;
+    grid-template-columns: 1fr;
   }
 
   .videosNav:nth-child(3) {
     grid-area: content;
+  }
+
+  .headerHamburger{
+    position: fixed;
+  }
+}
+
+@media (min-width: 700px) {
+
+  .videosMain {
+    grid-area: content;
+    display: grid;
+    grid-template-areas: "navigation content";
+    grid-template-columns: auto 3fr;
   }
 
   .videosNav {

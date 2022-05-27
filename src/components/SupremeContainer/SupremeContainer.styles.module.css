@@ -1,3 +1,7 @@
+.supremeContainer {
+  background-color: var(--background-color); 
+}
+
 @media (min-width: 500px) {
   .supremeContainer {
     display: grid;
@@ -5,6 +9,5 @@
     gap: var(--size-10);
     grid-area: content;
     padding: var(--size-9);
-    background: var(--white);
   }
 }

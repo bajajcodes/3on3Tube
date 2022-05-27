@@ -23,7 +23,7 @@ function SearchBar() {
       onSubmit={(e) => filterVideosOnSearch(e)}
       onChange={(e) => filterVideosOnFly(e)}
     >
-      <InputField />
+      <InputField placeholder="Enter title to search videos..."/>
       <button
         className={`button cursor-pointer font-wt-600 ${styles.searchButton}`}
       >

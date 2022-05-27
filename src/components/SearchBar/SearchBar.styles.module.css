@@ -3,6 +3,10 @@
   margin: 0;
   width: 100%;
   border: 0;
+  font-size: var(--size-10);
+}
+.searchWrapper :first-child::placeholder{
+  font-size: var(--size-10);
 }
 
 .searchWrapper :first-child:hover,

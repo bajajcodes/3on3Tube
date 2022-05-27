@@ -9,7 +9,7 @@
   .supremeContainerHeader {
     margin-bottom: 0;
     position: sticky;
-    top: calc(var(--size-15) * 1.93);
+    top: calc(var(--size-15) * 3.7);
     background: var(--white);
   }
   .cardContainer {
@@ -33,5 +33,9 @@
   .w50break {
     width: 50vw;
     margin: auto;
+  }
+
+  .supremeContainerHeader {
+    top: calc(var(--size-15) * 1.93);
   }
 }

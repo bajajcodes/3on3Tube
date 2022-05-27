@@ -1,7 +1,7 @@
 import styles from "./InputField.styles.module.css";
 import { useInputField } from "./useInputField.hook";
 
-function InputField({ fieldMetaInfo }) {
+function InputField({ fieldMetaInfo, placeholder="" }) {
   const { fieldState, toggleIcon } = useInputField(fieldMetaInfo);
   return (
     <label
@@ -31,7 +31,7 @@ function InputField({ fieldMetaInfo }) {
         className={`p-sm ${styles.inputField}`}
         name={fieldMetaInfo?.name ?? "No Name"}
         type={fieldState?.inputType ?? "text"}
-        placeholder={fieldMetaInfo?.placeholderText ?? ""}
+        placeholder={fieldMetaInfo?.placeholderText ?? placeholder}
         autoComplete="off"
       />
     </label>
