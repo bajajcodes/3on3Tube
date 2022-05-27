@@ -36,7 +36,7 @@ social wisdom, to be 3 on 3 in life.
 
 ## How to run app locally
 1. Clone the repository
-- On Terminal change directory to zipped file code directory.
+- On Terminal change directory to `3on3 Tube` directory.
 - Type npm start and hit enter.
 - Project is running locally.
 2. Download the zip file code
