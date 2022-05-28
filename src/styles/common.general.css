@@ -81,3 +81,7 @@
 .w50break {
   width: 100%;
 }
+
+.alert-z-index-1001{
+  z-index: 1001;
+}

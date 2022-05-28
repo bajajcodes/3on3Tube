@@ -40,7 +40,7 @@ function Alert({ alertOptions, toggleShow }) {
 
   return (
     <div
-      className={`alert align-items-center alertDisplay ${info.background} ${
+      className={`alert align-items-center alertDisplay alert-z-index-1001 ${info.background} ${
         controller ? "dflex" : "dnone"
       }`}
     >
