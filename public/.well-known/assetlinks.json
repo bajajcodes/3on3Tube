@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.awesomelinking",
+      "sha256_cert_fingerprints": [
+        "97:FF:67:19:E1:0B:FC:70:B4:C3:0C:17:C3:F9:1F:84:14:A5:8C:6E:8A:9A:81:5C:30:7D:1B:34:AB:s05:31:A8"
+      ]
+    }
+  }
+]
